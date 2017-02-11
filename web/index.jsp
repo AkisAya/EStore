@@ -21,8 +21,10 @@
       <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
       </c:if>
       <c:if test="${sessionScope.user != null}">
-      欢迎${sessionScope.user.nickname}，
-      <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
+          欢迎${sessionScope.user.nickname},
+          <a href="${pageContext.request.contextPath}/addProduct.jsp">添加商品</a>,
+          <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">查看商品</a>,
+          <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
       </c:if>
   </div>
   </body>
