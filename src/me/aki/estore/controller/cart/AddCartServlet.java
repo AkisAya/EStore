@@ -20,7 +20,7 @@ public class AddCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1 根据商品id查找商品
         String id = request.getParameter("id");
-        ProductService productService = BasicFactory.getFactory().getInstance(ProductService.class);
+        ProductService productService = BasicFactory.getFactory().getService(ProductService.class);
         Product product = productService.findProductById(id);
 
         // 2 向购物车中添加商品

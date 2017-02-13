@@ -43,7 +43,7 @@ public class AutoLoginFilter implements Filter {
                 String value = autoLoginCookie.getValue();
                 String username = value.split(":")[0];
                 String password = value.split(":")[1];
-                UserService userService = BasicFactory.getFactory().getInstance(UserService.class);
+                UserService userService = BasicFactory.getFactory().getService(UserService.class);
                 try {
                     User user = userService.findUserByNameAndPwd(username, password);
                     if (user != null) {

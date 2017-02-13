@@ -103,7 +103,7 @@ public class AddProductServlet extends HttpServlet {
             // 2 调用Service将商品添加到数据库
             Product product = new Product();
             BeanUtils.populate(product, paramMap);
-            ProductService productService = BasicFactory.getFactory().getInstance(ProductService.class);
+            ProductService productService = BasicFactory.getFactory().getService(ProductService.class);
             productService.addProduct(product);
 
             response.getWriter().write("提交成功");

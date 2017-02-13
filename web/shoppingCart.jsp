@@ -28,7 +28,7 @@
     <a href="${pageContext.request.contextPath}/index.jsp">回到首页</a>
     <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">继续购物</a>
     <a href="${pageContext.request.contextPath}/servlet/ClearCartServlet">清空购物车</a>
-    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/img/gotoorder.bmp"/></a>
+    <a href="${pageContext.request.contextPath}/addOrder.jsp"><img src="${pageContext.request.contextPath}/img/gotoorder.bmp"/></a>
 </div>
 
 <hr>

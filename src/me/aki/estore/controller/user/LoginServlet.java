@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         String password = MD5Util.md5(request.getParameter("password"));
 
         // 根据用户名和密码登录
-        UserService userService = BasicFactory.getFactory().getInstance(UserService.class);
+        UserService userService = BasicFactory.getFactory().getService(UserService.class);
         try {
             User user = userService.login(username, password);
             // 将用户放入session中表示用户登录，然后进行页面跳转

@@ -24,7 +24,7 @@ public class ChangeCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1 根据商品id查找商品
         String id = request.getParameter("id");
-        ProductService productService = BasicFactory.getFactory().getInstance(ProductService.class);
+        ProductService productService = BasicFactory.getFactory().getService(ProductService.class);
         Product product = productService.findProductById(id);
 
         // 2 修改商品数量

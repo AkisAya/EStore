@@ -26,7 +26,7 @@ public class ActiveUserServlet extends HttpServlet {
         String activeCode = request.getParameter("activecode");
 
         // 调用service激活用户
-        UserService userService = BasicFactory.getFactory().getInstance(UserService.class);
+        UserService userService = BasicFactory.getFactory().getService(UserService.class);
         try {
             User user = userService.activeUser(activeCode);
             response.getWriter().write("激活成功！3秒钟后自动跳转到首页");

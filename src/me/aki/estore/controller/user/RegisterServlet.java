@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         // 调用service
-        UserService userService = BasicFactory.getFactory().getInstance(UserService.class);
+        UserService userService = BasicFactory.getFactory().getService(UserService.class);
         try {
             userService.register(user);
             // 注册成功

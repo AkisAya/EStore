@@ -22,7 +22,7 @@ public class ProductDetailServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductService productService = BasicFactory.getFactory().getInstance(ProductService.class);
+        ProductService productService = BasicFactory.getFactory().getService(ProductService.class);
         String id = request.getParameter("id");
         Product product = productService.findProductById(id);
         if (product != null) {

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Aki on 2017/2/11.
  */
-public interface ProductService {
+public interface ProductService extends Service {
     void addProduct(Product product);
 
     List<Product> findAllProducts();

@@ -12,7 +12,7 @@ import java.util.UUID;
  * Created by Aki on 2017/2/11.
  */
 public class ProductServiceImpl implements ProductService {
-    ProductDao dao = BasicFactory.getFactory().getInstance(ProductDao.class);
+    ProductDao dao = BasicFactory.getFactory().getDao(ProductDao.class);
     @Override
     public void addProduct(Product product) {
         product.setId(UUID.randomUUID().toString());

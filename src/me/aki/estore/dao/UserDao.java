@@ -8,10 +8,10 @@ import java.sql.SQLException;
 /**
  * Created by Aki on 2017/2/10.
  */
-public interface UserDao {
-    User findUserByName(User user, Connection connection) throws SQLException;
+public interface UserDao  extends Dao {
+    User findUserByName(User user) throws SQLException;
 
-    void addUser(User user, Connection connection) throws SQLException;
+    void addUser(User user) throws SQLException;
 
     User findUserByCode(String activeCode) throws SQLException;
 

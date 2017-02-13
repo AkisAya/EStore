@@ -22,7 +22,7 @@ public class ProductListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProductService productService = BasicFactory.getFactory().getInstance(ProductService.class);
+        ProductService productService = BasicFactory.getFactory().getService(ProductService.class);
         List<Product> productList = productService.findAllProducts();
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("/productList.jsp").forward(request, response);
