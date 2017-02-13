@@ -1,4 +1,4 @@
-package me.aki.estore.controller;
+package me.aki.estore.controller.user;
 
 import me.aki.estore.domain.User;
 import me.aki.estore.exception.UserException;

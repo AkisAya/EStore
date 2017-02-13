@@ -1,4 +1,4 @@
-package me.aki.estore.controller;
+package me.aki.estore.controller.product;
 
 import me.aki.estore.domain.Product;
 import me.aki.estore.factory.BasicFactory;

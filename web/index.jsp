@@ -24,6 +24,7 @@
           欢迎${sessionScope.user.nickname},
           <a href="${pageContext.request.contextPath}/addProduct.jsp">添加商品</a>,
           <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">查看商品</a>,
+          <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>,
           <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
       </c:if>
   </div>

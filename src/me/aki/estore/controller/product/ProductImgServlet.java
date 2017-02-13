@@ -1,4 +1,4 @@
-package me.aki.estore.controller;
+package me.aki.estore.controller.product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

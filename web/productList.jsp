@@ -14,6 +14,9 @@
 <body>
 <h1>商品列表</h1>
 <table width="100%" style="text-align: center">
+    <div align="right">
+        <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>
+    </div>
     <c:forEach items="${productList}" var="product" varStatus="status">
         <tr>
             <td width="20%">

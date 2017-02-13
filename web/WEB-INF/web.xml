@@ -10,7 +10,12 @@
         <param-value>utf-8</param-value>
     </context-param>
 
-
+    <!--监听器配置-->
+    <listener>
+        <listener-class>me.aki.estore.listener.MySessionListener</listener-class>
+    </listener>
+    
+    
     <!--过滤器配置-->
     <filter>
         <description>全站乱码过滤器</description>

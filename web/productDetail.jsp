@@ -21,7 +21,8 @@
             商品库存:${product.pnum }<br>
             商品价格:${product.price }<br>
             商品描述:${product.description }<br>
-            <a href="#"><img src="${pageContext.request.contextPath}/img/buy.bmp"/></a><br>
+            <a href="${pageContext.request.contextPath}/servlet/AddCartServlet?id=${product.id}">
+                <img src="${pageContext.request.contextPath}/img/buy.bmp"/></a><br>
         </td>
     </tr>
 </table>
