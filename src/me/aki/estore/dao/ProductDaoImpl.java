@@ -36,12 +36,10 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void decreaseInventory(String productId, int quantity) throws SQLException {
+    public int decreaseInventory(String productId, int quantity) throws SQLException {
         String sql = "update products set pnum = pnum - ? where id = ? and pnum - ? > 0";
         QueryRunner runner = new QueryRunner(TransactionManager.getDataSource());
         int count = runner.update(sql, quantity, productId, quantity);
-        if(count<=0){
-            throw new SQLException("库存不足!");
-        }
+        return count;
     }
 }

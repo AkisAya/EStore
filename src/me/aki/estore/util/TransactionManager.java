@@ -62,7 +62,7 @@ public class TransactionManager {
      */
     public static DataSource getDataSource() {
         if (hasOpenedTransaction.get()) { // 如果开启了事务
-            return (DataSource) Proxy.newProxyInstance(dataSource.getClass().getClassLoader(), dataSource.getClass().getInterfaces(),
+            return (DataSource) Proxy.newProxyInstance(dataSource.getClass().getClassLoader(), new Class[]{DataSource.class},
                     new InvocationHandler() {
                         @Override
                         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

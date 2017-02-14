@@ -2,6 +2,7 @@ package me.aki.estore.factory;
 
 import me.aki.estore.annotation.OpenTransaction;
 import me.aki.estore.dao.Dao;
+import me.aki.estore.exception.OrderException;
 import me.aki.estore.service.Service;
 import me.aki.estore.util.TransactionManager;
 
@@ -75,7 +76,11 @@ public class BasicFactory {
                                     return obj;
                                 } catch (InvocationTargetException e) {
                                     TransactionManager.rollback();//--回滚事务
-                                    throw new RuntimeException(e.getTargetException());
+                                    if (e.getTargetException() instanceof OrderException) {
+                                        throw new OrderException(e.getTargetException());
+                                    } else {
+                                        throw new RuntimeException(e.getTargetException());
+                                    }
                                 } catch (Exception e) {
                                     TransactionManager.rollback();
                                     throw new RuntimeException(e);
@@ -93,6 +98,5 @@ public class BasicFactory {
             e.printStackTrace();
             throw new RuntimeException("生成实例失败", e);
         }
-
     }
 }

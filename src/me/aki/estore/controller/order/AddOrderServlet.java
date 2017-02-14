@@ -4,6 +4,7 @@ import me.aki.estore.domain.Order;
 import me.aki.estore.domain.OrderItem;
 import me.aki.estore.domain.Product;
 import me.aki.estore.domain.User;
+import me.aki.estore.exception.OrderException;
 import me.aki.estore.factory.BasicFactory;
 import me.aki.estore.service.OrderService;
 
@@ -54,14 +55,20 @@ public class AddOrderServlet extends HttpServlet {
 
 
         // 调用service添加订单
-        service.addOrder(order);
+        try {
+            service.addOrder(order); // 添加失败会抛出异常
+            //3.清空购物车
+            cart.clear();
+            //4.回到主页
+            response.getWriter().write("订单生成成功!请去支付!");
+            response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/index.jsp");
 
-        //3.清空购物车
-        cart.clear();
+        } catch (OrderException e) {
+            e.printStackTrace();
+            response.getWriter().write("订单生成失败，" + e.getMessage());
+            response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/index.jsp");
+        }
 
-        //4.回到主页
-        response.getWriter().write("订单生成成功!请去支付!");
-        response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/index.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
