@@ -36,8 +36,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int decreaseInventory(String productId, int quantity) throws SQLException {
-        String sql = "update products set pnum = pnum - ? where id = ? and pnum - ? > 0";
+    public int changeInventory(String productId, int quantity) throws SQLException {
+        String sql = "update products set pnum = pnum + ? where id = ? and pnum + ? > 0";
         QueryRunner runner = new QueryRunner(TransactionManager.getDataSource());
         int count = runner.update(sql, quantity, productId, quantity);
         return count;

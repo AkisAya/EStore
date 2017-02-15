@@ -4,8 +4,11 @@ import me.aki.estore.domain.Order;
 import me.aki.estore.domain.OrderItem;
 import me.aki.estore.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by Aki on 2017/2/13.
@@ -24,5 +27,47 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "insert into orderItem values(?, ?, ?)";
         QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
         queryRunner.update(sql, orderItem.getOrder_id(), orderItem.getProduct_id(), orderItem.getQuantity());
+    }
+
+    @Override
+    public List<Order> findOrderByUserId(int userId) throws SQLException {
+        String sql = "SELECT * FROM orders where user_id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        return queryRunner.query(sql, new BeanListHandler<Order>(Order.class), userId);
+    }
+
+    @Override
+    public List<OrderItem> findOrderItemByOrderId(String id) throws SQLException {
+        String sql = "SELECT * FROM orderitem where order_id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        return queryRunner.query(sql, new BeanListHandler<OrderItem>(OrderItem.class), id);
+    }
+
+    @Override
+    public void delOrderItem(String id) throws SQLException {
+        String sql = "delete from orderitem where order_id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        queryRunner.update(sql,id);
+    }
+
+    @Override
+    public void delOrder(String id) throws SQLException {
+        String sql = "delete from orders where id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        queryRunner.update(sql,id);
+    }
+
+    @Override
+    public Order findOrderByOrderId(String orderId) throws SQLException {
+        String sql = "SELECT * FROM orders where id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        return queryRunner.query(sql, new BeanHandler<Order>(Order.class), orderId);
+    }
+
+    @Override
+    public void updatePayState(String orderId, int paystate) throws SQLException {
+        String sql = "update orders set paystate = ? where id = ?";
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        queryRunner.update(sql,paystate, orderId);
     }
 }
