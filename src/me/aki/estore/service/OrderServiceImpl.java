@@ -2,10 +2,7 @@ package me.aki.estore.service;
 
 import me.aki.estore.dao.OrderDao;
 import me.aki.estore.dao.ProductDao;
-import me.aki.estore.domain.Order;
-import me.aki.estore.domain.OrderExt;
-import me.aki.estore.domain.OrderItem;
-import me.aki.estore.domain.Product;
+import me.aki.estore.domain.*;
 import me.aki.estore.exception.OrderException;
 import me.aki.estore.factory.BasicFactory;
 import org.apache.commons.beanutils.BeanUtils;
@@ -116,5 +113,16 @@ public class OrderServiceImpl implements OrderService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<SaleRank> findSaleRank() {
+        List<SaleRank> saleRankList = null;
+        try {
+            saleRankList = orderDao.findSalesOrderByNum();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return saleRankList;
     }
 }

@@ -2,6 +2,7 @@ package me.aki.estore.dao;
 
 import me.aki.estore.domain.Order;
 import me.aki.estore.domain.OrderItem;
+import me.aki.estore.domain.SaleRank;
 import me.aki.estore.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -69,5 +70,26 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "update orders set paystate = ? where id = ?";
         QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
         queryRunner.update(sql, paystate, orderId);
+    }
+
+    @Override
+    public List<SaleRank> findSalesOrderByNum() throws SQLException {
+        String sql = "SELECT" +
+                "    products.id productId," +
+                "    products.name productName," +
+                "    SUM(orderitem.quantity) saleNum" +
+                " FROM" +
+                "    orders," +
+                "    products," +
+                "    orderitem" +
+                " WHERE" +
+                "    orders.paystate = 1" +
+                "        AND orders.id = orderitem.order_id" +
+                "        AND orderitem.product_id = products.id" +
+                " GROUP BY productId" +
+                " ORDER BY saleNum DESC";
+        System.out.println(sql);
+        QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
+        return queryRunner.query(sql, new BeanListHandler<SaleRank>(SaleRank.class));
     }
 }

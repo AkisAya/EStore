@@ -2,6 +2,7 @@ package me.aki.estore.dao;
 
 import me.aki.estore.domain.Order;
 import me.aki.estore.domain.OrderItem;
+import me.aki.estore.domain.SaleRank;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,4 +27,6 @@ public interface OrderDao extends Dao {
     Order findOrderByOrderId(String orderId) throws SQLException;
 
     void updatePayState(String orderId, int paystate) throws SQLException;
+
+    List<SaleRank> findSalesOrderByNum() throws SQLException;
 }

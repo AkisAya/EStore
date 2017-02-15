@@ -14,9 +14,11 @@
 <body>
 <h1>商品列表</h1>
 <table width="100%" style="text-align: center">
-    <div align="right">
+    <a href="${pageContext.request.contextPath}/index.jsp">回到首页</a>
+    <div style="display: inline; float: right;">
         <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>
     </div>
+    <hr>
     <c:forEach items="${productList}" var="product" varStatus="status">
         <tr>
             <td width="20%">

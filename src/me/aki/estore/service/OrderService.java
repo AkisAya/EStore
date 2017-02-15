@@ -3,6 +3,7 @@ package me.aki.estore.service;
 import me.aki.estore.annotation.OpenTransaction;
 import me.aki.estore.domain.Order;
 import me.aki.estore.domain.OrderExt;
+import me.aki.estore.domain.SaleRank;
 import me.aki.estore.exception.OrderException;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface OrderService  extends Service {
     Order findOrderById(String orderId);
 
     void changePayState(String r6_order, int i);
+
+    List<SaleRank> findSaleRank();
 }

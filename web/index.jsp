@@ -21,12 +21,20 @@
       <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
       </c:if>
       <c:if test="${sessionScope.user != null}">
-          欢迎${sessionScope.user.nickname},
-          <a href="${pageContext.request.contextPath}/addProduct.jsp">添加商品</a>,
-          <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">查看商品</a>,
-          <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>,
-          <a href="${pageContext.request.contextPath}/servlet/OrderListServlet">查看订单</a>,
-          <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
+          <c:if test="${sessionScope.user.role == 'user'}">
+              欢迎${sessionScope.user.nickname}<br>
+              <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">查看商品</a>,
+              <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>,
+              <a href="${pageContext.request.contextPath}/servlet/OrderListServlet">查看订单</a>,
+              <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
+          </c:if>
+          <c:if test="${sessionScope.user.role == 'admin'}">
+              欢迎管理员 ${sessionScope.user.nickname}<br>
+              <a href="${pageContext.request.contextPath}/addProduct.jsp">添加商品</a>,
+              <a href="${pageContext.request.contextPath}/servlet/ProductListServlet">查看商品</a>,
+              <a href="${pageContext.request.contextPath}/servlet/SaleListServlet">下载销售榜单</a>
+              <a href="${pageContext.request.contextPath}/servlet/LogoutServlet">退出登录</a>
+          </c:if>
       </c:if>
   </div>
   </body>

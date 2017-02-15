@@ -23,7 +23,7 @@ public class MD5Util {
         return md5code;
     }
 
-    public static void main(String[] args) {
-        System.out.println(MD5Util.md5("123456"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(MD5Util.md5("admin"));
+//    }
 }

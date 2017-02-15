@@ -1,0 +1,15 @@
+/addOrder.jsp
+/confirm.jsp
+/orderList.jsp
+/pay.jsp
+/shoppingCart.jsp
+
+/servlet/AddCartServlet
+/servlet/ChangeCartServlet
+/servlet/ClearCartServlet
+/servlet/DelCartServlet
+
+/servlet/AddOrderServlet
+/servlet/CancelOrderServlet
+/servlet/OrderListServlet
+/servlet/PayServlet
