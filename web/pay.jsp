@@ -15,7 +15,7 @@
     <table width="60%">
         <tr>
             <td bgcolor="#F7FEFF" colspan="4">
-                订单号：${param.orderId} <input type="hidden" value="${param.id }" name="orderId"/><br>
+                订单号：${param.orderId} <input type="hidden" value="${param.orderId}" name="orderId"/><br>
                 支付金额：${param.money}元
             </td>
         </tr>

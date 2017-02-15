@@ -68,6 +68,6 @@ public class OrderDaoImpl implements OrderDao {
     public void updatePayState(String orderId, int paystate) throws SQLException {
         String sql = "update orders set paystate = ? where id = ?";
         QueryRunner queryRunner = new QueryRunner(TransactionManager.getDataSource());
-        queryRunner.update(sql,paystate, orderId);
+        queryRunner.update(sql, paystate, orderId);
     }
 }

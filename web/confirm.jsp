@@ -9,7 +9,8 @@
 <body>
 <!-- 确认支付form -->
 <form action="https://www.yeepay.com/app-merchant-proxy/node" method="post">
-	<h3>订单号：${p2_Order},付款金额 ：${p3_Amt }</h3>
+	<h3>订单号：${p2_Order}</h3>
+	<h3>付款金额 ：${p3_Amt }</h3>
 	<input type="hidden" name="pd_FrpId" value="${pd_FrpId }" />
 	<input type="hidden" name="p0_Cmd" value="${p0_Cmd }" />
 	<input type="hidden" name="p1_MerId" value="${p1_MerId }" />

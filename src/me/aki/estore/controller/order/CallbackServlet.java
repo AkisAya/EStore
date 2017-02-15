@@ -43,7 +43,7 @@ public class CallbackServlet extends HttpServlet {
 			if("1".equals(r9_BType)){
 				//浏览器重定向访问,不能确信真的支付成功
 				response.getWriter().write("支付成功!!!");
-				response.setHeader("refresh", "3;url=/index.jsp");
+				response.setHeader("refresh", "3;url=" + request.getContextPath() + "/index.jsp");
 
 				OrderService service = BasicFactory.getFactory().getService(OrderService.class);
 				service.changePayState(r6_Order,1);
@@ -57,9 +57,6 @@ public class CallbackServlet extends HttpServlet {
 				service.changePayState(r6_Order,1);
 				response.getWriter().print("SUCCESS");
 			}
-
-
-
 		}else{
 			throw new RuntimeException("数据被篡改过!!!!!!!");
 		}

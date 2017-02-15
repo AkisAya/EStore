@@ -31,10 +31,12 @@ public class AutoLoginFilter implements Filter {
             // 获取自动登录cookie
             Cookie[] cookies = request.getCookies();
             Cookie autoLoginCookie = null;
-            for (Cookie c: cookies) {
-                if ("autoLogin".equals(c.getName())) {
-                    autoLoginCookie = c;
-                    break;
+            if (cookies != null) {
+                for (Cookie c: cookies) {
+                    if ("autoLogin".equals(c.getName())) {
+                        autoLoginCookie = c;
+                        break;
+                    }
                 }
             }
 
@@ -54,6 +56,7 @@ public class AutoLoginFilter implements Filter {
                     e.printStackTrace();
                 }
             }
+
         }
 
 

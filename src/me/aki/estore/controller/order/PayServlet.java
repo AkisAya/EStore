@@ -32,7 +32,7 @@ public class PayServlet extends HttpServlet {
         String p5_Pid = "";
         String p6_Pcat = "";
         String p7_Pdesc = "";
-        String p8_Url = "http://localhost:8080/servlet/CallbackServlet";  // 由于本demo不在公网上，所以支付系统访问不到callback
+        String p8_Url = "http://localhost:8080/estore/servlet/CallbackServlet";  // 由于本demo不在公网上，所以支付系统不能用socket访问不到callback
         String p9_SAF = "0";
         String pa_MP  = "";
         String pd_FrpId = request.getParameter("pd_FrpId");
