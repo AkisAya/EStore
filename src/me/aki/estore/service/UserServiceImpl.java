@@ -89,8 +89,9 @@ public class UserServiceImpl implements UserService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new UserException("查询出错,服务器正在开小差");
+//            throw new UserException("查询出错,服务器正在开小差");
         }
+        return null;
     }
 
     @Override
@@ -98,7 +99,9 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findUserByNameAndPwd(username, password);
         } catch (SQLException e) {
-            throw new UserException("查询出错,服务器正在开小差");
+            e.printStackTrace();
+//            throw new UserException("查询出错,服务器正在开小差");
         }
+        return null;
     }
 }

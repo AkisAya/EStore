@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
             dao.addProduct(product);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 
@@ -33,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
             productList = dao.findAllProducts();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
         return productList;
     }
@@ -44,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             product = dao.findProductById(id);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return product;
     }

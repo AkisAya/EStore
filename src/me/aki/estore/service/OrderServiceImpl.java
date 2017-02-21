@@ -39,7 +39,6 @@ public class OrderServiceImpl implements OrderService {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new OrderException(e);
         }
     }
 
@@ -91,7 +90,6 @@ public class OrderServiceImpl implements OrderService {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new OrderException(e);
         }
     }
 

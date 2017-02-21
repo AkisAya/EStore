@@ -3,6 +3,7 @@ package me.aki.estore.factory;
 import me.aki.estore.annotation.OpenTransaction;
 import me.aki.estore.dao.Dao;
 import me.aki.estore.exception.OrderException;
+import me.aki.estore.exception.UserException;
 import me.aki.estore.service.Service;
 import me.aki.estore.util.TransactionManager;
 
@@ -78,7 +79,9 @@ public class BasicFactory {
                                     TransactionManager.rollback();//--回滚事务
                                     if (e.getTargetException() instanceof OrderException) {
                                         throw new OrderException(e.getTargetException());
-                                    } else {
+                                    } else if (e.getTargetException() instanceof UserException) {
+                                        throw new UserException(e.getTargetException());
+                                    } else{
                                         throw new RuntimeException(e.getTargetException());
                                     }
                                 } catch (Exception e) {
