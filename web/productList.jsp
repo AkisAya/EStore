@@ -12,8 +12,7 @@
     <title>商品列表</title>
 
     <script type="text/javascript">
-        <%--var str = ${pageContext.request.contextPath};--%>
-//        声明了以上变量后函数就不能响应了
+        <%--var str = '${pageContext.request.contextPath}';--%>
         var currentPage = ${pager.currentPage};
         var totalPage = ${pager.totalPage};
 
