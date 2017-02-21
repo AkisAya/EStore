@@ -1,6 +1,8 @@
 package me.aki.estore.service;
 
 import me.aki.estore.dao.ProductDao;
+import me.aki.estore.domain.Constant;
+import me.aki.estore.domain.Page;
 import me.aki.estore.domain.Product;
 import me.aki.estore.factory.BasicFactory;
 
@@ -45,5 +47,23 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException(e);
         }
         return product;
+    }
+
+    @Override
+    public Page<Product> findPageProduct(int pageNum) {
+        Page<Product> page = null;
+
+        try {
+            int totalRecord = dao.calculateProductNum();
+            int totalPage = totalRecord % Constant.DEFAULT_PAGE_SIZE == 0 ?
+                    totalRecord / Constant.DEFAULT_PAGE_SIZE : totalRecord / Constant.DEFAULT_PAGE_SIZE + 1;
+            List<Product> productList = dao.finPageProducts(pageNum);
+            page = new Page<>(totalRecord, totalPage, pageNum, productList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return page;
     }
 }

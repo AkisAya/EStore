@@ -10,6 +10,38 @@
 <html>
 <head>
     <title>商品列表</title>
+
+    <script type="text/javascript">
+        <%--var str = ${pageContext.request.contextPath};--%>
+//        声明了以上变量后函数就不能响应了
+        var currentPage = ${pager.currentPage};
+        var totalPage = ${pager.totalPage};
+
+        function firstPage() {
+            window.location.href = "${pageContext.request.contextPath}/servlet/ProductListServlet?pageNum=1";
+        }
+
+        function previousPage() {
+            if (currentPage === 1) {
+                alert("已经是第一页了！");
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/servlet/ProductListServlet?pageNum=" + (currentPage - 1);
+            }
+        }
+
+        function nextPage() {
+            if (currentPage === totalPage) {
+                alert("已经是最后一页了！");
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/servlet/ProductListServlet?pageNum=" + (currentPage + 1);
+            }
+        }
+
+        function lastPage() {
+            window.location.href = "${pageContext.request.contextPath}/servlet/ProductListServlet?pageNum=" + totalPage;
+        }
+    </script>
+
 </head>
 <body>
 <h1>商品列表</h1>
@@ -19,7 +51,7 @@
         <a href="${pageContext.request.contextPath}/shoppingCart.jsp">查看购物车</a>
     </div>
     <hr>
-    <c:forEach items="${productList}" var="product" varStatus="status">
+    <c:forEach items="${pager.dataList}" var="product" varStatus="status">
         <tr>
             <td width="20%">
                 <a href="${pageContext.request.contextPath}/servlet/ProductDetailServlet?id=${product.id }">
@@ -45,5 +77,12 @@
         </tr>
     </c:forEach>
 </table>
+<div align="center">
+    共${pager.totalRecord}条记录，共${pager.totalPage}页，当前第${pager.currentPage}页 &nbsp;&nbsp;&nbsp;
+    <a href="javascript:void(0)" onclick="firstPage()">首页</a>&nbsp;&nbsp;
+    <a href="javascript:void(0)" onclick="previousPage()">上一页</a>&nbsp;&nbsp;
+    <a href="javascript:void(0)" onclick="nextPage()">下一页</a>&nbsp;&nbsp;
+    <a href="javascript:void(0)" onclick="lastPage()">尾页</a>&nbsp;&nbsp;
+</div>
 </body>
 </html>

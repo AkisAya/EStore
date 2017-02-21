@@ -17,4 +17,8 @@ public interface ProductDao extends Dao {
     Product findProductById(String id) throws SQLException;
 
     int changeInventory(String productId, int quantity) throws SQLException;
+
+    int calculateProductNum() throws SQLException;
+
+    List<Product> finPageProducts(int pageNum) throws SQLException;
 }
