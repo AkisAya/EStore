@@ -1,15 +1,18 @@
 package me.aki.estore.util;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.PooledDataSource;
 import org.apache.commons.dbutils.DbUtils;
 
-
+import javax.naming.Referenceable;
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * Created by Aki on 2017/2/13.
@@ -62,7 +65,8 @@ public class TransactionManager {
      */
     public static DataSource getDataSource() {
         if (hasOpenedTransaction.get()) { // 如果开启了事务
-            return (DataSource) Proxy.newProxyInstance(dataSource.getClass().getClassLoader(), new Class[]{DataSource.class},
+            return (DataSource) Proxy.newProxyInstance(dataSource.getClass().getClassLoader(),
+                    new Class[] {PooledDataSource.class, Referenceable.class, Serializable.class},
                     new InvocationHandler() {
                         @Override
                         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -91,5 +95,10 @@ public class TransactionManager {
         localRealConn.remove();
         localProxyConn.remove();
         hasOpenedTransaction.remove();
+    }
+
+    public static void main(String[] args) {
+        Class[] classes = new ComboPooledDataSource().getClass().getInterfaces();
+        System.out.println(Arrays.toString(classes));
     }
 }

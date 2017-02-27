@@ -57,7 +57,7 @@ public class PicUtils {
 		_image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
 		FileOutputStream out = new FileOutputStream(destFile); // 输出到文件流
 		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(_image); // 近JPEG编码
+		encoder.encode(_image); // JPEG编码
 		out.close();
 	}
 
