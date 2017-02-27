@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>添加商品</title>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
     <script type="text/javascript">
         function checkData(){
             var price = document.getElementsByName("price")[0].value;
@@ -23,6 +24,23 @@
             }else{
                 return true;
             }
+        }
+
+
+        function upload() {
+            $("#bar1").css("display", "block");
+            // every 0.1s toggle showProgress()
+            window.setInterval(showProgress, 100);
+        }
+
+        function showProgress() {
+            $.post("${pageContext.request.contextPath}/servlet/uploadProgress",
+            function (data) {
+                if (data != null) {
+                    var jsonObj = eval("(" + data + ")");
+                    $("#bar2").css("width", jsonObj.per + "%");
+                }
+            });
         }
     </script>
 </head>
@@ -57,14 +75,23 @@
                 </tr>
                 <tr>
                     <td>商品图片</td>
-                    <td><input type="file" name="imgFile"></td>
+                    <td>
+                        <input type="file" name="imgFile">
+                        <div id="bar1" style = "width: 173px; height: 5px; border: 1px solid green; display:none;">
+                            <div id="bar2" style="width: 0% ;height: 5px;background-color: green"/>
+                        </div>
+                        <div id="msg_div"></div>
+                    </td>
+
                 </tr>
                 <tr>
                     <td>商品简介</td>
                     <td><textarea name="description" cols="22" rows="5"></textarea> </td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center"><input type="submit" value="提交" style="width: 100px"></td>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="提交" style="width: 100px" onclick="upload()">
+                    </td>
                 </tr>
             </table>
         </form>

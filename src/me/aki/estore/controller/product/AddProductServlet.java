@@ -1,12 +1,14 @@
 package me.aki.estore.controller.product;
 
 import me.aki.estore.domain.Product;
+import me.aki.estore.domain.UploadMsg;
 import me.aki.estore.factory.BasicFactory;
 import me.aki.estore.service.ProductService;
 import me.aki.estore.util.IOUtil;
 import me.aki.estore.util.PicUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +29,7 @@ import java.util.UUID;
  */
 @WebServlet(name = "AddProductServlet", urlPatterns = "/servlet/AddProductServlet")
 public class AddProductServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(final HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String encode = this.getServletContext().getInitParameter("encode");
         Map<String, String> paramMap = new HashMap<>();
@@ -45,8 +48,30 @@ public class AddProductServlet extends HttpServlet {
 
         ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
         servletFileUpload.setHeaderEncoding(encode);
-        servletFileUpload.setFileSizeMax(1024*1024); // 单个文件最大1M
-        servletFileUpload.setSizeMax(10*1024*1024);
+//        servletFileUpload.setFileSizeMax(1024*1024); // 单个文件最大1M
+//        servletFileUpload.setSizeMax(10*1024*1024);
+
+        servletFileUpload.setProgressListener(new ProgressListener() {
+            @Override
+            public void update(long bytesRead, long contentLength, int items) {
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+                UploadMsg umsg= new UploadMsg();
+                BigDecimal br = new BigDecimal(bytesRead).divide(new BigDecimal(1024), 2, BigDecimal.ROUND_HALF_UP);
+                BigDecimal cl = new BigDecimal(contentLength).divide(new BigDecimal(1024), 2, BigDecimal.ROUND_HALF_UP);
+                //剩余字节数
+                BigDecimal ll = cl.subtract(br);
+                //上传百分比
+                BigDecimal per = br.multiply(new BigDecimal(100)).divide(cl,2,BigDecimal.ROUND_HALF_UP);
+                umsg.setPer(per.toString());
+                request.getSession().setAttribute("umsg", umsg);
+            }
+        });
+
 
         if (!servletFileUpload.isMultipartContent(request)) {
             throw new RuntimeException("请使用正确的表单上传！");
