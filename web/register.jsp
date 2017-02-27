@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>用户注册</title>
+            <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
     <script>
         function changeImg(img) {
             img.src = img.src+"?time="+new Date().getTime();
@@ -51,6 +52,24 @@
             }
             return true;
         }
+        
+        
+        
+        $(document).ready(function () {
+            var $username = $("input[name=username]");
+            $username.change(function () {
+                $.post("${pageContext.request.contextPath}/servlet/ValidateName", {username: $username.val()},
+                    function (data) {
+                    var jsonObj = eval("(" + data + ")");
+                    if (jsonObj.stat == 0) {
+                        $("#username_msg").html("<font color='red'>" + jsonObj.msg + "</font>");
+                    } else {
+                        $("#username_msg").html("<font color='green'>" + jsonObj.msg + "</font>");
+                    }
+                });
+            });
+
+        })
     </script>
     
     

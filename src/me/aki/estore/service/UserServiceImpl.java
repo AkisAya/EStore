@@ -104,4 +104,16 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public boolean hasUser(String username) {
+        User user = new User();
+        user.setUsername(username);
+        try {
+            return userDao.findUserByName(user) != null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

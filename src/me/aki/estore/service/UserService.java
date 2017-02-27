@@ -16,4 +16,6 @@ public interface UserService extends Service {
     User login(String username, String password) throws UserException;
 
     User findUserByNameAndPwd(String username, String password) throws UserException;
+
+    boolean hasUser(String username);
 }
